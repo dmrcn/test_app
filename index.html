@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>POST Test</title>
+</head>
+<body>
+
+<h2>Railway POST Test</h2>
+
+<input id="text" placeholder="Bir şey yaz">
+<button onclick="send()">Gönder</button>
+
+<pre id="result"></pre>
+
+<script>
+async function send() {
+    const text = document.getElementById("text").value;
+
+    const res = await fetch("https://TEST-DOMAIN.up.railway.app/echo", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text })
+    });
+
+    document.getElementById("result").innerText =
+        "STATUS: " + res.status + "\n\n" + await res.text();
+}
+</script>
+
+</body>
+</html>
